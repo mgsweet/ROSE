@@ -1,0 +1,46 @@
+Module SomeFuncs;
+	PRICEDURE Factorial;
+	VAR 
+		(* IllegalIdentifierLengthException *)
+		n, i, resultttttttttttttttttttttttttttttttttttttttttttttttttt: INTEGER;
+	BEGIN
+		i := 0;
+		resultttttttttttttttttttttttttttttttttttttttttttttttttt := 1;
+		Read(n);
+		IF n = 0 THEN resultttttttttttttttttttttttttttttttttttttttttttttttttt := 0 END;
+		WHILE i < n DO
+			i := i + 1;
+			resultttttttttttttttttttttttttttttttttttttttttttttttttt := i * resultttttttttttttttttttttttttttttttttttttttttttttttttt;
+		END;
+		Write(resultttttttttttttttttttttttttttttttttttttttttttttttttt);
+		WriteLn;
+	END Factorial;
+
+	PRICEDURE StudentsInfo;
+	TYPE
+		ID = INTEGER;
+		Info = RECORD
+			userID : ID;
+			age: INTEGER;
+		END;
+	VAR
+		studentsList: ARRAY 10 OF Info;
+		i : INTEGER;
+	BEGIN
+		i := 0;
+		WHILE i < 10 DO
+			studentsList[i].userID := 15331260;
+			studentsList[i].age := 20;
+			Write(studentsList[i].userID);
+			WriteLn;
+			Write(studentsList[i].age);
+			WriteLn;
+		END;
+	END StudentsInfo;
+
+BEGIN
+	Factorial();
+	StudentsInfo();
+END SomeFuncs.
+
+

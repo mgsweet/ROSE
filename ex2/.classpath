@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Aaron-Qiu/Desktop/大师之路/黑科技/jflex-1.4-2.1/lib/JFlex.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
