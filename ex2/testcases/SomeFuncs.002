@@ -1,10 +1,10 @@
 Module SomeFuncs;
-	(* ParameterMismatchedException *)
-	PRICEDURE Factorial(n, m : INTEGER);
+	PRICEDURE Factorial;
 	VAR 
-		n, i, result: INTEGER;
+		(* IllegalIntegerException *)
+		n, 01i, result: INTEGER;
 	BEGIN
-		i := 0;
+		i0 := 0;
 		result := 1;
 		Read(n);
 		IF n = 0 THEN result := 0 END;
@@ -39,9 +39,8 @@ Module SomeFuncs;
 	END StudentsInfo;
 
 BEGIN
-	Factorial(1);
+	Factorial();
 	StudentsInfo();
 END SomeFuncs.
-
 
 

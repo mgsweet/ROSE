@@ -20,8 +20,8 @@ import exceptions.*;
 %eofval}
 
 %{
-int get_line(){return yyline;}
-int get_column(){return yycolumn;}
+	int get_line(){return yyline;}
+	int get_column(){return yycolumn;}
 %}
 
 Operator = "+"|"-"|"*"|"div"|"mod"|":="|"="|"#"|">"|"<"|">="|"<="|"("|")"|"&"|"or"|"~"|"["|"]"|"."|":"
