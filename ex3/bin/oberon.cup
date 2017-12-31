@@ -1,0 +1,198 @@
+import java_cup.runtime.*;
+import exceptions.*;
+import callgraph.*;
+import java.util.*;
+
+parser code {:
+	public CallGraph graph;
+:}
+
+init with {:  
+	graph = new CallGraph();
+:};
+
+scan with {: 
+	return getScanner().next_token(); 
+:};
+
+/* Terminals (tokens returned by the scanner). */
+
+/*arithmetic operator*/
+terminal PLUS, MINUS, TIMES, DIVIDE, MOD, ASSIGN;
+/*logical operator*/
+terminal EQ, NEQ, LT, LE, GT, GE, OR, AND, NOT;
+/*keyword*/
+terminal INTEGER, BOOLEAN, READ, WRITE, WRITELN, RECORD, ARRAY, MODULE, CONST, TYPE, VAR, PROCEDURE; 
+/*reserved word*/
+terminal IF, THEN, ELSIF, ELSE, WHILE, DO, BEGIN, END, OF;
+/*other tokens*/
+terminal SEMI, COLON, COMMA, PERIOD, LBRACKET, RBRACKET, LPAREN, RPAREN;
+/*identifier, number*/
+terminal String IDENTIFIER;
+terminal Integer  NUMBER;
+
+/* Non terminals */
+non terminal module_block;
+non terminal begin_block, declarations, const_declare, const_list, type_declare, type_list, var_declare, var_list;
+non terminal procedure_declaration, procedure_body, var_if;
+non terminal field_list, field_one, statement_sequence, statement, while_statement;
+non terminal if_statement, elsif_statement, procedure_call, actual_parameters, ap_list, assignment;
+non terminal simple_expression, term_list, term, factor, selector, else_statement;
+
+non terminal Integer identifier_list, expression;
+
+non terminal String procedure_heading, formal_parameters, fp_section, type, array_type, record_type, fp_section_list;
+
+/*Precedences */
+precedence right ASSIGN;
+precedence left OR;
+precedence left AND;
+precedence right NOT;
+precedence left EQ, NEQ, LT, LE, GT, GE;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MOD;
+precedence left LPAREN;
+
+/* The grammar */
+module_block ::= MODULE IDENTIFIER:id1 SEMI declarations begin_block END IDENTIFIER:id2 PERIOD
+	{:
+		parser.graph.show();
+	:}; 
+
+begin_block ::= BEGIN statement_sequence | ;
+
+declarations ::= const_declare type_declare var_declare procedure_declaration;
+
+const_declare ::= CONST const_list |  ;
+
+const_list	::=	const_list IDENTIFIER:id EQ expression:e SEMI | ;
+
+type_declare ::= TYPE type_list | ;
+
+type_list ::= type_list IDENTIFIER:id EQ type:t SEMI | ;
+
+var_declare ::= VAR var_list | ;
+
+var_list ::= var_list identifier_list:id_list COLON type:t SEMI | ;
+
+procedure_declaration ::= procedure_heading:id1 SEMI procedure_body:id2 SEMI | ;
+
+procedure_body ::= declarations begin_block END IDENTIFIER:id;
+
+procedure_heading ::= PROCEDURE IDENTIFIER:id formal_parameters:fp
+	{:
+		RESULT = id;
+		parser.graph.addProcedure(id, id + "()");
+	:};
+
+formal_parameters ::= LPAREN fp_section_list:fp_s_l RPAREN 
+	{:
+		RESULT = fp_s_l.toString();
+	:}
+	| LPAREN RPAREN
+	{:
+		RESULT = "";
+	:}
+	| 
+	{:
+		RESULT = "";
+	:};
+
+fp_section_list ::= fp_section_list:fp_s_l SEMI fp_section:fp_s
+	{:
+		RESULT = fp_s_l.toString() + ", " + fp_s.toString();
+	:}
+	| fp_section:fp_s
+	{:
+		RESULT = fp_s.toString();
+	:};
+
+fp_section ::= var_if identifier_list:id_list COLON type:t
+	{:
+		RESULT = "";
+		String temp = t.toString();
+		for (int i = 0; i < id_list.intValue(); i++) {
+			RESULT += temp;
+			if (i != id_list.intValue() - 1) RESULT += ", ";
+		}
+	:};
+
+var_if ::= VAR | ;
+
+type ::= IDENTIFIER:id 
+	{:
+		RESULT = id.toString();
+	:}
+	| array_type: at 
+	{:
+		RESULT = at.toString();
+	:}
+	| record_type: rt
+	{:
+		RESULT = rt.toString();
+	:}
+	;
+
+record_type ::= RECORD field_list END {:
+		RESULT = "RECORD";
+	:};
+
+field_list ::=	field_list SEMI field_one | field_one;
+
+field_one ::= identifier_list COLON type | ;
+
+array_type ::= ARRAY expression:ex OF type:t
+	{:
+		RESULT = t.toString() + "[" + ex.intValue() + "]";
+	:};
+
+identifier_list ::=	IDENTIFIER:id 
+	{:
+		RESULT = new Integer(1);
+	:}
+	| identifier_list:id_list COMMA IDENTIFIER:id
+	{:
+		RESULT = id_list.intValue() + 1;
+	:};
+
+statement_sequence ::=	statement | statement_sequence SEMI statement;
+
+statement ::= assignment | procedure_call | if_statement | while_statement | ;
+
+while_statement ::=	WHILE expression:e DO statement_sequence END;
+
+if_statement ::=	IF expression:e THEN statement_sequence elsif_statement else_statement END;
+
+elsif_statement ::=	elsif_statement ELSIF expression THEN statement_sequence | ;
+
+else_statement ::=	ELSE statement_sequence | ;
+
+procedure_call ::= IDENTIFIER:id actual_parameters: ap;
+
+actual_parameters ::= LPAREN ap_list:ap RPAREN | ;
+
+ap_list ::=	ap_list:ap COMMA expression:e | expression:e | ;
+
+assignment ::= IDENTIFIER:id selector:s  ASSIGN expression:e;
+
+expression ::= simple_expression:se1 EQ simple_expression:se2 |
+			   simple_expression:se1 NEQ simple_expression:se2 |
+			   simple_expression:se1 LE simple_expression:se2 |
+			   simple_expression:se1 LT simple_expression:se2 |
+			   simple_expression:se1 GE simple_expression:se2 |
+			   simple_expression:se1 GT simple_expression:se2;
+
+simple_expression ::= term_list | PLUS term_list | MINUS term_list;
+
+term_list ::= term_list:tl PLUS term:t | term_list:tl MINUS term:t | 
+			  term_list:tl OR term:t | term:t;
+
+term ::= factor | term TIMES factor | term DIVIDE factor | term MOD factor | term AND factor;
+
+factor ::= IDENTIFIER:id selector | NUMBER | LPAREN expression RPAREN;
+
+selector ::= PERIOD IDENTIFIER:id | LBRACKET expression RBRACKET;
+
+
+
+

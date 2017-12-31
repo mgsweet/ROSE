@@ -13,7 +13,7 @@ public class Main {
 		String return_id;
 		if (args.length == 0)
 		{
-			System.out.println("Usage : java testOberon <inputfile>");
+			System.out.println("Usage : java Main <inputfile>");
 		}
 		else
 		{

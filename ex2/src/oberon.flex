@@ -54,14 +54,14 @@ MismatchedComment= "(*" ([^\*] | "*"+[^\)])* | ([^\(]|"("+[^\*])* "*)"
 				if (yylength() > 12)
 					throw new IllegalIntegerRangeException();
 				else {
-					{return "Number";}
+					return "Number";
 				}
 			}
 	{Identifier}		{
 				if (yylength() > 24)
 					throw new IllegalIdentifierLengthException();
 				else {
-					{return "Identifier";}
+					return "Identifier";
 				}
 			}
 }
