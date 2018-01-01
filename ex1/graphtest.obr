@@ -2,10 +2,9 @@ MODULE CallGraph;
 	VAR x, y: INTEGER;   
 	PROCEDURE a;  
 	BEGIN   
-		b(x, 1);   
-		c(y, 2);  
+		b(x, 1);
+		c(y, 2);
 	END a;
-
 	PROCEDURE b(i: INTEGER; j: INTEGER);  
 	BEGIN   
 		x := i + j;  

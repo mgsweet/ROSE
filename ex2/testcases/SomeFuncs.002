@@ -1,5 +1,5 @@
 Module SomeFuncs;
-	PRICEDURE Factorial;
+	PROCEDURE Factorial;
 	VAR 
 		(* IllegalIntegerException *)
 		n, 01i, result: INTEGER;
@@ -16,7 +16,7 @@ Module SomeFuncs;
 		WriteLn;
 	END Factorial;
 
-	PRICEDURE StudentsInfo;
+	PROCEDURE StudentsInfo;
 	TYPE
 		ID = INTEGER;
 		Info = RECORD

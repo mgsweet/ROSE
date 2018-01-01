@@ -1,6 +1,6 @@
-import java.io.FileNotFoundException;
 
-import exceptions.LexicalException;
+
+import java.io.FileNotFoundException;
 
 /**
  * @author Aaron-Qiu
@@ -34,6 +34,7 @@ public class Main {
 				}
 				catch(Exception ex)
 				{
+					// ex.printStackTrace();
 					System.out.println(obj.get_line()+" line "+ obj.get_column()+" column");
 					System.out.println(ex.getMessage());
 				}

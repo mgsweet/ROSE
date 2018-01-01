@@ -43,7 +43,9 @@ Comment	= "(*"~"*)"
 Punctuation = ";" | ","
 Identifier = [:jletter:]+[:jletterdigit:]*
 Number = [1-9]+[0-9]* | 0[0-7]*
-WhiteSpace 	= " "|\t|\b|\f|\r|\n|\r\n
+// WhiteSpace 	= " "|\t|\b|\f|\r|\n|\r\n
+LineTerminator = \r\n|\r|\n
+WhiteSpace = [ \t\f]
 
 IllegalOctal = 0[0-7]*[9|8]+[0-9]*
 IllegalInteger 	= {Number}+{Identifier}+
@@ -100,23 +102,25 @@ MismatchedComment= "(*" ([^\*] | "*"+[^\)])* | ([^\(]|"("+[^\*])* "*)"
 
 	{Comment}	{/*Do nothing*/}
 	{MismatchedComment}	{throw new MismatchedCommentException(yytext());}
-	{WhiteSpace}	{/* just skip what was found, do nothing */}
+	{WhiteSpace}	{}
+	{LineTerminator} {}
+
 	{IllegalOctal}	{throw new IllegalOctalException(yytext());}
 	{IllegalInteger}	{throw new IllegalIntegerException(yytext());}
-	{Number}		{
-				if (yylength() > 12)
-					throw new IllegalIntegerRangeException(yytext());
-				else {
-					return symbol(sym.NUMBER, yytext());
-				}
-			}
-	{Identifier}		{
-				if (yylength() > 24)
-					throw new IllegalIdentifierLengthException(yytext());
-				else {
-					return symbol(sym.IDENTIFIER, yytext());
-				}
-			}
+	{Number}	{
+		if (yylength() > 12)
+			throw new IllegalIntegerRangeException(yytext());
+		else {
+			return symbol(sym.NUMBER, yytext());
+		}
+	}
+	{Identifier}	{
+		if (yylength() > 24)
+			throw new IllegalIdentifierLengthException(yytext());
+		else {
+			return symbol(sym.IDENTIFIER, yytext());
+		}
+	}
 }
 [^]	{throw new IllegalSymbolException(yytext());}
 

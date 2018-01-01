@@ -1,6 +1,6 @@
 (* MismatchedCommentException 
 Module SomeFuncs;
-	PRICEDURE Factorial;
+	PROCEDURE Factorial;
 	VAR 
 		n, i, result: INTEGER;
 	BEGIN
@@ -16,7 +16,7 @@ Module SomeFuncs;
 		WriteLn;
 	END Factorial;
 
-	PRICEDURE StudentsInfo;
+	PROCEDURE StudentsInfo;
 	TYPE
 		ID = INTEGER;
 		Info = RECORD

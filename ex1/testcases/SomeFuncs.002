@@ -1,8 +1,8 @@
 Module SomeFuncs;
-	PRICEDURE Factorial;
+	PROCEDURE Factorial;
 	VAR 
 		(* IllegalIntegerException *)
-		n, i0, result: INTEGER;
+		n, 01i, result: INTEGER;
 	BEGIN
 		i0 := 0;
 		result := 1;
@@ -16,7 +16,7 @@ Module SomeFuncs;
 		WriteLn;
 	END Factorial;
 
-	PRICEDURE StudentsInfo;
+	PROCEDURE StudentsInfo;
 	TYPE
 		ID = INTEGER;
 		Info = RECORD
