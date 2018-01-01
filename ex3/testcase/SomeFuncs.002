@@ -1,9 +1,10 @@
 Module SomeFuncs;
-	PROCEDURE Factorial();
+	PROCEDURE Factorial;
 	VAR 
-		n, i, result: INTEGER;
+		(* IllegalIntegerException *)
+		n, 01i, result: INTEGER;
 	BEGIN
-		i := 0;
+		i0 := 0;
 		result := 1;
 		Read(n);
 		IF n = 0 THEN result := 0 END;
@@ -11,8 +12,7 @@ Module SomeFuncs;
 			i := i + 1;
 			result := i * result;
 		END;
-		(* MissingOperatorException *)
-		Write();
+		Write(result);
 		WriteLn;
 	END Factorial;
 
@@ -38,11 +38,9 @@ Module SomeFuncs;
 		END;
 	END StudentsInfo;
 
-	PROCEDURE k();  
-	BEGIN   
-		Factorial();
-		StudentsInfo();  
-	END k;
+BEGIN
+	Factorial();
+	StudentsInfo();
 END SomeFuncs.
 
 

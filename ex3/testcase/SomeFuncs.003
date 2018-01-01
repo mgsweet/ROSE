@@ -4,15 +4,15 @@ Module SomeFuncs;
 		n, i, result: INTEGER;
 	BEGIN
 		i := 0;
-		result := 1;
+		(* IllegalIntegerRangeException *)
+		result := 111111111111111111111111111111;
 		Read(n);
 		IF n = 0 THEN result := 0 END;
 		WHILE i < n DO
 			i := i + 1;
 			result := i * result;
 		END;
-		(* MissingRightParenthesisException *)
-		Write(result;
+		Write(result);
 		WriteLn;
 	END Factorial;
 
@@ -38,11 +38,9 @@ Module SomeFuncs;
 		END;
 	END StudentsInfo;
 
-	PROCEDURE k();  
-	BEGIN   
-		Factorial();
-		StudentsInfo();  
-	END k;
+BEGIN
+	Factorial();
+	StudentsInfo();
 END SomeFuncs.
 
 

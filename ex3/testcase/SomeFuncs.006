@@ -1,6 +1,8 @@
+(* MismatchedCommentException 
 Module SomeFuncs;
 	PROCEDURE Factorial;
-		VAR n, i, result: INTEGER;
+	VAR 
+		n, i, result: INTEGER;
 	BEGIN
 		i := 0;
 		result := 1;
@@ -10,8 +12,7 @@ Module SomeFuncs;
 			i := i + 1;
 			result := i * result;
 		END;
-		(* MissingLeftParenthesisException *)
-		Write result);
+		Write(result);
 		WriteLn;
 	END Factorial;
 
@@ -37,11 +38,9 @@ Module SomeFuncs;
 		END;
 	END StudentsInfo;
 
-	PROCEDURE k();  
-	BEGIN   
-		Factorial();
-		StudentsInfo();  
-	END k;
-END SomeFuncs.
 
+BEGIN
+	Factorial();
+	StudentsInfo();
+END SomeFuncs.
 

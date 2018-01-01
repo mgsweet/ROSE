@@ -1,11 +1,12 @@
 Module SomeFuncs;
 	PROCEDURE Factorial;
 	VAR 
-		n, i, result: INTEGER;
+		(* IllegalSymbolException *)
+		n, i, result: INTEGER;@@@@@@@@@@@
 	BEGIN
-		Read(n);
 		i := 0;
 		result := 1;
+		Read(n);
 		IF n = 0 THEN result := 0 END;
 		WHILE i < n DO
 			i := i + 1;
@@ -36,12 +37,10 @@ Module SomeFuncs;
 			WriteLn;
 		END;
 	END StudentsInfo;
-	
-	PROCEDURE k();  
-	BEGIN   
-		Factorial();
-		StudentsInfo();  
-	END k;
+
+BEGIN
+	Factorial();
+	StudentsInfo();
 END SomeFuncs.
 
 

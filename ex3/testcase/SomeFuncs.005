@@ -1,18 +1,18 @@
 Module SomeFuncs;
 	PROCEDURE Factorial;
 	VAR 
-		(* TypeMismatchedException *)
-		n, i, result: BOOLEAN;
+		(* IllegalIdentifierLengthException *)
+		n, i, resultttttttttttttttttttttttttttttttttttttttttttttttttt: INTEGER;
 	BEGIN
 		i := 0;
-		result := 1;
+		resultttttttttttttttttttttttttttttttttttttttttttttttttt := 1;
 		Read(n);
-		IF n = 0 THEN result := 0 END;
+		IF n = 0 THEN resultttttttttttttttttttttttttttttttttttttttttttttttttt := 0 END;
 		WHILE i < n DO
 			i := i + 1;
-			result := i * result;
+			resultttttttttttttttttttttttttttttttttttttttttttttttttt := i * resultttttttttttttttttttttttttttttttttttttttttttttttttt;
 		END;
-		Write(result);
+		Write(resultttttttttttttttttttttttttttttttttttttttttttttttttt);
 		WriteLn;
 	END Factorial;
 
@@ -38,13 +38,9 @@ Module SomeFuncs;
 		END;
 	END StudentsInfo;
 
-	PROCEDURE k();  
-	BEGIN   
-		Factorial();
-		StudentsInfo();  
-	END k;
+BEGIN
+	Factorial();
+	StudentsInfo();
 END SomeFuncs.
-
-
 
 
