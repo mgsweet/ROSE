@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="src/" kind="src" path=""/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Aaron-Qiu/Desktop/ROSE/lib/callgraph.jar"/>
+	<classpathentry kind="lib" path="/Users/Aaron-Qiu/Desktop/ROSE/lib/flowchart.jar"/>
+	<classpathentry kind="lib" path="/Users/Aaron-Qiu/Desktop/ROSE/lib/jgraph.jar"/>
+	<classpathentry kind="lib" path="lib/java-cup/java-cup-11b-runtime.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

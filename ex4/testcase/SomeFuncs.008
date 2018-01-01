@@ -1,0 +1,48 @@
+Module SomeFuncs;
+	PROCEDURE Factorial;
+	VAR 
+		n, i, result: INTEGER;
+	BEGIN
+		i := 0;
+		result := 1;
+		Read(n);
+		IF n = 0 THEN result := 0 END;
+		WHILE i < n DO
+			i := i + 1;
+			result := i * result;
+		END;
+		(* MissingRightParenthesisException *)
+		Write(result;
+		WriteLn;
+	END Factorial;
+
+	PROCEDURE StudentsInfo;
+	TYPE
+		ID = INTEGER;
+		Info = RECORD
+			userID : ID;
+			age: INTEGER;
+		END;
+	VAR
+		studentsList: ARRAY 10 OF Info;
+		i : INTEGER;
+	BEGIN
+		i := 0;
+		WHILE i < 10 DO
+			studentsList[i].userID := 15331260;
+			studentsList[i].age := 20;
+			Write(studentsList[i].userID);
+			WriteLn;
+			Write(studentsList[i].age);
+			WriteLn;
+		END;
+	END StudentsInfo;
+
+	PROCEDURE k();  
+	BEGIN   
+		Factorial();
+		StudentsInfo();  
+	END k;
+END SomeFuncs.
+
+
